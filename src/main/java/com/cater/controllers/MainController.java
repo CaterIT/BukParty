@@ -26,17 +26,43 @@ public class MainController {
 
 	protected Logger logger = LoggerFactory.getLogger(MainController.class);
 	
-	// opens up demo.jsp
-	@RequestMapping(value = "/demo", method = RequestMethod.GET)
-	public ModelAndView demo(@RequestParam("name") String name) {
-		ModelAndView model = new ModelAndView();
-		User u=userservice.getUser();
-		u.setFirstName(name);
-		model.setViewName("Demo");
-		model.addObject("user", u);
-		logger.info("Logger working..");
-		return model;
-	}
+	// opens up home page
+			@RequestMapping(value = "/home", method = RequestMethod.GET)
+			public ModelAndView home() {
+				ModelAndView model = new ModelAndView();
+				User u=userservice.getUser();
+				u.setFirstName("Siddharth");
+				model.setViewName("sqlSearch");
+				model.addObject("user", u);
+				logger.info("Home page working..");
+				
+				return model;
+			}
+			
+	//opens up the results Page
+			@RequestMapping(value = "/Result", method = RequestMethod.GET)
+			public ModelAndView result(@RequestParam("cater_name") String cater_name)
+			{
+				ModelAndView model = new ModelAndView();
+				User u=userservice.getUser();
+				u.setFirstName(cater_name);
+				model.setViewName("Result");
+				model.addObject("cater_name", u);
+				logger.info("Result Page Success!");
+				return model;
+			}
+		
+		// opens up demo.jsp
+		@RequestMapping(value = "/demo", method = RequestMethod.GET)
+		public ModelAndView demo(@RequestParam("name") String name) {
+			ModelAndView model = new ModelAndView();
+			User u=userservice.getUser();
+			u.setFirstName(name);
+			model.setViewName("Demo");
+			model.addObject("user", u);
+			logger.info("Logger working..");
+			return model;
+		}
 
 	// opens CatererRegistration page
 	@RequestMapping(value = "/CatererRegistration", method = RequestMethod.GET)
